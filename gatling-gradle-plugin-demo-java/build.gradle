@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    // The following line allows to load io.gatling.gradle plugin and directly apply it
+    id 'io.gatling.gradle' version '3.9.3.1'
+}
+
+dependencies {
+    gatling "ru.tinkoff:gatling-kafka-plugin_2.13:0.11.3"
+    // https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients
+    implementation 'org.apache.kafka:kafka-clients:3.4.0'
+}
+gatling {
+  // WARNING: options below only work when logback config file isn't provided
+  logLevel = 'WARN' // logback root level
+  logHttp = 'NONE' // set to 'ALL' for all HTTP traffic in TRACE, 'FAILURES' for failed HTTP traffic in DEBUG
+  enterprise {
+    // Enterprise Cloud (https://cloud.gatling.io/) configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/gradle_plugin/#working-with-gatling-enterprise-cloud
+    // Enterprise Self-Hosted configuration reference: https://gatling.io/docs/gatling/reference/current/extensions/gradle_plugin/#working-with-gatling-enterprise-self-hosted
+  }
+}
+
+repositories {
+  mavenCentral()
+    maven { url 'https://repo.maven.apache.org/maven2' }
+    maven { url 'https://packages.confluent.io/maven/' }
+}
